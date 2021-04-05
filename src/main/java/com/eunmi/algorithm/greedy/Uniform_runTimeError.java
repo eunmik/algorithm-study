@@ -25,7 +25,7 @@ public class Uniform_runTimeError {
          * if(lost[i] +1 or lost[i]-1 in reserve)
          *      n++;
          * **/
-        U
+        int answer = 0;
         n = n - lost.length; //전체 학생 수 에서 도둑맞은 학생 수를 먼저 뺀다.
         for(int i =0; i<lost.length; i++) {
             int before = lost[i] - 1;
