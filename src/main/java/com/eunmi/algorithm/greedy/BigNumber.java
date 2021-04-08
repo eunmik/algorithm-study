@@ -11,7 +11,7 @@ public class BigNumber {
         //"99991" 3,   "99"
         //"11119" 3, "19"
         //"999" 2, "9"
-        System.out.println(b.solution("99999999999999999", 9));
+        System.out.println(b.solution("99999999999999999", 9)); //9를 명시해서 continue
 
     }
 
@@ -27,7 +27,7 @@ public class BigNumber {
             list.add(array[i]);
         }
 
-        Arrays.sort(c_array, Comparator.reverseOrder()); //내림차순으로 정렬
+        Arrays.sort(c_array, Comparator.reverseOrder()); //내림차순으로 정렬 --> TODO 정렬을 하면 안된디ㅏ.
         char bigNum = c_array[0];
         int bigNum_idx = 0;
         for(int i=0; i<array.length; i++){ //제일 큰수의 인덱스를 구한다.
