@@ -55,9 +55,10 @@ public class Tteokbokki {
                  return mid;
              }
              if(sum > requested[1]){
-                 return binarySearch(requested, tteoks, mid, max);
+                 //mid만 주어지면 이미 검색한거를 또하는 거인격
+                 return binarySearch(requested, tteoks, mid+1, max);
              }else {
-                 return binarySearch(requested, tteoks, min, mid);
+                 return binarySearch(requested, tteoks, min, mid-1);
              }
 
          }
