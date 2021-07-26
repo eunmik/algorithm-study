@@ -19,7 +19,7 @@ public class 문자열압축 {
      */
     public static void main(String[] args){
         문자열압축 s = new 문자열압축();
-        System.out.println(s.solution("aabbaccc"));
+        System.out.println(s.solution2("aabbaccc"));
     }
     public int solution(String s){
 
@@ -73,7 +73,7 @@ public class 문자열압축 {
     public int solution2(String s) {
         int answer = 0;
 
-        for(int i=1; i<=(s.length()/2)+1; i++){
+        for(int i=1; i<=(s.length()/2)+1; i++){ //0글자의 경우 5글자까지는 봐야하기 때문
             int result = getSplitedLength(s, i, 1).length();
             answer = i==1 ? result : (answer>result?result:answer);
         }
@@ -89,10 +89,19 @@ public class 문자열압축 {
 
         // 불일치 -> 현재까지 [반복횟수 + 반복문자] 조합
         if(!postString.startsWith(preString)){
-            if(repeat ==1) return result += preString + getSplitedLength(postString, n, 1);
-            return result += Integer.toString(repeat) + preString + getSplitedLength(postString, n, 1);
+            if(repeat ==1){
+                result += preString + getSplitedLength(postString, n, 1);
+                System.out.println(result);
+                return result;
+            }
+
+            result += Integer.toString(repeat) + preString + getSplitedLength(postString, n, 1);
+            System.out.println(result);
+            return result;
         }
 
-        return result += getSplitedLength(postString, n, repeat+1);
+        result += getSplitedLength(postString, n, repeat+1);
+        System.out.println(result);
+        return result;
     }
 }
