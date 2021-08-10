@@ -27,7 +27,6 @@ public class 디스크컨트롤러 {
             @Override
             public int compare(Job j1, Job j2) {
                 int result = j1.workingTime - j2.workingTime;
-                System.out.println("j1 - j2, workingTime : "+j1.workingTime+"-"+j2.workingTime+"="+result);
                 return result;
             }
         });
@@ -40,7 +39,6 @@ public class 디스크컨트롤러 {
             @Override
             public int compare(Job j1, Job j2) {
                 int result = j1.requestedTime - j2.requestedTime;
-                System.out.println("j1 - j2, requestedTime : "+j1.requestedTime+"-"+j2.requestedTime+"="+result);
                 return result;
             }
         });
