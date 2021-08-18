@@ -2,6 +2,10 @@ package com.eunmi.algorithm.category.heap;
 
 import java.util.*;
 
+/**
+ * 푼 날짜 : 21-08-12
+ * 소요 시간 : 기억안남...
+ */
 //https://programmers.co.kr/learn/courses/30/lessons/42627
 public class 디스크컨트롤러 {
     //[[0, 3], [1, 9], [2, 6]]	9
