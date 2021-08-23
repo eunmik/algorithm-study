@@ -1,4 +1,4 @@
-package com.eunmi.algorithm.practices.목요일스터디.A210826;
+package com.eunmi.algorithm.practices.일요일스터디.A210822;
 
 import java.util.ArrayList;
 import java.util.List;
