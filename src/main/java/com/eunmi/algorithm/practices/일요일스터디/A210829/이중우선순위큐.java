@@ -25,12 +25,6 @@ public class 이중우선순위큐 {
     //D 1 : 최댓값 삭제
     //D -1 : 최솟값 삭제
     public int[] solution(String[] operations){
-        PriorityQueue<Integer> pq = new PriorityQueue<Integer>(new Comparator<Integer>() {
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                return o2-o1;
-            }
-        });
         Deque<Integer> dq = new ArrayDeque<>();
 
         for(String operation : operations){
@@ -39,8 +33,6 @@ public class 이중우선순위큐 {
             switch(op){
                 case "I" :
                     dq.add(Integer.parseInt(num));
-//                    pq.add(Integer.parseInt(num));
-
                     break;
                 case "D" :
                     dq = sort(dq);
