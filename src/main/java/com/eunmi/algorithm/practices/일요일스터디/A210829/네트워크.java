@@ -9,9 +9,9 @@ package com.eunmi.algorithm.practices.일요일스터디.A210829;
 public class 네트워크 {
     public static void main(String[] args) {
         네트워크 n = new 네트워크();
-        //int[][] computers = {{1, 1, 0}, {1, 1, 1}, {0, 1, 1}}; //1
-        int[][] computers = {{1, 1, 0, 1}, {1, 1, 0, 0}, {0, 0, 1, 1}, {1, 0, 1, 1}}; //1
-        System.out.println(n.solution(4, computers));
+        int[][] computers = {{1, 1, 0}, {1, 1, 0}, {0, 0, 1}}; //2
+        //int[][] computers = {{1, 1, 0, 1}, {1, 1, 0, 0}, {0, 0, 1, 1}, {1, 0, 1, 1}}; //1
+        System.out.println(n.solution(3, computers));
 
     }
 
@@ -24,7 +24,7 @@ public class 네트워크 {
         int result = 0;
         for(int i = 0; i < n; i++){
             if(!visited[i]){
-                visited[i] = true;
+                //visited[i] = true;
                 dfs(computers, i, visited);
                 result++;
             }
@@ -34,20 +34,20 @@ public class 네트워크 {
 
     }
 
-    public void dfs(int[][] computers, int node, boolean[] visited) {
+    public void dfs(int[][] computers, int i, boolean[] visited) {
         /*
          * 1. n 길이만큼 for문을 돌린다.
          * 2. 자기 자신이 아니고, 값이 1 이면 dfs 메소드를 재귀 호출한다.
 
          */
-        for (int i = node; i < computers.length; i++) {
+        visited[i] = true;
             for (int j = 0; j < computers.length; j++) {
-                if (i != j && !visited[i] && computers[i][j] == 1) {
-                    visited[i] = true;
-                    dfs(computers, i, visited);
+                if (i != j && !visited[j] && computers[i][j] == 1) {
+
+                    dfs(computers, j, visited);
                 }
             }
-        }
+
         return;
     }
 
