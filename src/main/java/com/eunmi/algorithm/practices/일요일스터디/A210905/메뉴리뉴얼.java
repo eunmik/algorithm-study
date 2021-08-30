@@ -11,19 +11,14 @@ import java.util.*;
 public class 메뉴리뉴얼 {
     public static void main(String[] args){
         메뉴리뉴얼 m = new 메뉴리뉴얼();
-        //String[] orders = {"ABCFG", "AC", "CDE", "ACDE", "BCFG", "ACDEH"};
-        //int[] course = {2, 3, 4};
-        //String[] orders = {"ABCDE", "AB", "CD", "ADE", "XYZ", "XYZ", "ACD"};
-        //int[] course = {2, 3, 5};
         String[] orders = {"XYZ", "XWY", "WXA"};
         int[] course = {2, 3, 4};
         String[] result = m.solution(orders, course);
         for(String r : result){
             System.out.println(r);
         }
-
     }
-    //static Map<String, Integer> map;
+
     static int most;
     public String[] solution(String[] orders, int[] course) {
 
@@ -47,8 +42,7 @@ public class 메뉴리뉴얼 {
         String[] result = new String[pq.size()];
         int i =0;
         while(!pq.isEmpty()){
-            result[i] = pq.poll();
-            i++;
+            result[i++] = pq.poll();
         }
 
         return result;
@@ -66,7 +60,6 @@ public class 메뉴리뉴얼 {
             return;
         }
         char[] wordArray = word.toCharArray();
-
         for(int i = idx; i < word.length(); i++){
             getMenu(cnt+1, str+wordArray[i], target, i+1, word, map);
         }
