@@ -17,9 +17,9 @@ public class 최단경로 {
         int V = Integer.parseInt(st.nextToken());
         int E = Integer.parseInt(st.nextToken());
         int start = Integer.parseInt(br.readLine());
-        d = new int[V + 1];
+        dist = new int[V + 1];
         checked = new boolean[V + 1];
-        adj = new ArrayList[V+1];
+        adj = new ArrayList[V+1]; //그래프의 인접 리스트
         for(int i =0; i<V+1; i++){
             adj[i] = new ArrayList<>();
         }
@@ -38,11 +38,11 @@ public class 최단경로 {
         dijkstra(start);
 
         StringBuilder sb = new StringBuilder();
-        for(int i = 1; i<d.length; i++){
-            if(d[i] == Integer.MAX_VALUE){
+        for(int i = 1; i< dist.length; i++){
+            if(dist[i] == Integer.MAX_VALUE){
                 sb.append("INF\n");
             }else {
-                sb.append(d[i]+"\n");
+                sb.append(dist[i]+"\n");
             }
 
         }
@@ -52,27 +52,30 @@ public class 최단경로 {
 
     }
     static ArrayList<Edge>[] adj;
-    static int[] d;
+    static int[] dist;
     static boolean[] checked;
     static void dijkstra(int start){
-        Arrays.fill(d, Integer.MAX_VALUE);
+        Arrays.fill(dist, Integer.MAX_VALUE);
         PriorityQueue<Edge> pq = new PriorityQueue<Edge>();
         pq.add(new Edge(start, 0));
-        d[start] = 0;
+        dist[start] = 0;
 
         while(!pq.isEmpty()){
             Edge current = pq.poll();
             int destination = current.destination;
 
+            //방문한 노드이면 넘어간다.
             if(checked[destination])
                 continue;
             else
                 checked[destination] = true;
 
+            //인접한 정점들을 모두 검사한다.
             for(Edge next : adj[destination]){
-                if(d[next.destination] >= d[destination] + next.weight){
-                    d[next.destination] = d[destination] + next.weight;
-                    pq.add(new Edge(next.destination, d[next.destination]));
+                //더 짧은 경로를 발견하면, dist[]를 갱신하고 우선순위 큐에 넣는다.
+                if(dist[next.destination] >= dist[destination] + next.weight){
+                    dist[next.destination] = dist[destination] + next.weight;
+                    pq.add(new Edge(next.destination, dist[next.destination]));
                 }
             }
         }
