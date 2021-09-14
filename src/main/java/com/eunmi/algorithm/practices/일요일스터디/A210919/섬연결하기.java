@@ -7,6 +7,7 @@ import java.util.PriorityQueue;
 /**
  * 푼 날짜 : 2021-09-14
  * 푼 시간 : 16:08~ 16:51 공부했던거라 빨리 풀었땅!!!
+ * 알고리즘 : 크루스칼
  */
 public class 섬연결하기 {
     public static void main(String[] args){
