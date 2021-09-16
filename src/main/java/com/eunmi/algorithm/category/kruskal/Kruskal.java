@@ -52,22 +52,6 @@ public class Kruskal {
     public static void main(String[] args){
         int n = 7;
         int m = 11;
-//        List<Edge>[] adj = new ArrayList[n];
-//        for(int i =0; i<n; i++){
-//            adj[i] = new ArrayList<>();
-//        }
-//
-//        adj[1].add(new Edge(1, 7, 12));
-//        adj[1].add(new Edge(1, 4, 28));
-//        adj[1].add(new Edge(1, 2, 67));
-//        adj[1].add(new Edge(1, 5, 17));
-//        adj[2].add(new Edge(2, 4, 24));
-//        adj[2].add(new Edge(2, 5, 62));
-//        adj[3].add(new Edge(3, 5, 20));
-//        adj[3].add(new Edge(3, 6, 37));
-//        adj[4].add(new Edge(4, 7, 13));
-//        adj[5].add(new Edge(5, 6, 45));
-//        adj[5].add(new Edge(6, 7, 73));
 
         PriorityQueue<Edge> pq = new PriorityQueue<>();
         pq.add(new Edge(1, 7, 12));
