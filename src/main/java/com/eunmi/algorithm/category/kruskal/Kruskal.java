@@ -1,7 +1,5 @@
 package com.eunmi.algorithm.category.kruskal;
 
-import sun.awt.windows.WPrinterJob;
-
 import java.util.*;
 
 public class Kruskal {
