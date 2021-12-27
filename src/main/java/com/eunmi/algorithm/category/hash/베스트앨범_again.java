@@ -11,6 +11,8 @@ public class 베스트앨범_again {
         베스트앨범_again a = new 베스트앨범_again();
         String[] genres = {"classic", "pop", "classic", "classic", "pop"};
         int[] plays = {500, 600, 150, 800, 2500};
+        //String[] genres = {"classic", "pop", "classic", "classic"};
+        //int[] plays = {500, 500, 500, 500, 500};
         int[] result = a.solution(genres, plays);
         for(int r : result){
             System.out.println(r);
@@ -40,10 +42,36 @@ public class 베스트앨범_again {
 
             map.put(genres[i], list);
         }
+        List<String[]> list = new ArrayList<>();
+        for(String key : mostListened.keySet()){
+            list.add(new String[]{key, mostListened.get(key).toString()});
+        }
+        list.sort(new Comparator<String[]>() {
+            @Override
+            public int compare(String[] o1, String[] o2) {
+                return Integer.parseInt(o2[1])-Integer.parseInt(o1[1]);
+            }
+        });
+        List<Integer> listResult = new ArrayList<>();
 
-        
+        int i =0;
+        for(String[] s : list){
+            listResult.add(map.get(s[0]).get(0)[0]);
+            i++;
+            if(map.get(s[0]).size() > 1) {
+                listResult.add(map.get(s[0]).get(1)[0]);
+                i++;
+            }
+        }
+        int[] result = new int[listResult.size()];
+        i = 0;
+        for(int in : listResult){
+            result[i] = in;
+            i++;
+        }
 
-        return null;
+
+        return result;
 
     }
 }
