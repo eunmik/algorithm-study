@@ -9,11 +9,15 @@ import java.util.*;
 public class 기능개발 {
     public static void main(String[] args) {
         기능개발 a = new 기능개발();
-        int[] progresses = new int[]{93, 30, 55};
-        int[] speeds = new int[]{1, 30, 5};
+//        int[] progresses = new int[]{93, 30, 55};
+//        int[] speeds = new int[]{1, 30, 5};
+//        int[] progresses = new int[]{60,50,40};
+//        int[] speeds = new int[]{50,50,50};
+        int[] progresses = new int[]{99,50,40};
+        int[] speeds = new int[]{5,50,50};
         int[] result = a.solution(progresses, speeds);
         for(int r : result){
-            System.out.println(r);
+            System.out.print(r+" ");
         }
 
     }
@@ -23,34 +27,35 @@ public class 기능개발 {
         int daysTowork = 0;
         Queue<Integer> queue = new LinkedList<>();
         for(int i =0; i<progresses.length; i++){
-            daysTowork = Math.round((100 - progresses[i]) / speeds[i]);
+            daysTowork = (int) Math.ceil((float) (100 - progresses[i]) / speeds[i]);
             queue.offer(daysTowork);
         }
         List<Integer> result = new ArrayList<>();
         int total = 1;
+        int prev = 0;
         while(!queue.isEmpty()){
-            int poll = queue.poll();
-            if(!queue.isEmpty()){
-                if(poll >= queue.peek()) {
+            if(prev == 0){
+                prev = queue.poll();
+            }else {
+                if(prev >= queue.peek()){ //현재 데이터가 전의 데이터보다 크면
+                    queue.poll();
                     total++;
                 }else {
+                    prev = queue.poll();
                     result.add(total);
                     total = 1;
+
                 }
-            }else {
-                result.add(total);
-                total = 1;
             }
-
-
         }
+        result.add(total);
+
         int[] answer = new int[result.size()];
-        int i =0;
-        for(int r : result){
-            answer[i] = r;
+        int i = 0;
+        for(int in : result){
+            answer[i] = in;
             i++;
         }
-
         return answer;
     }
 }
