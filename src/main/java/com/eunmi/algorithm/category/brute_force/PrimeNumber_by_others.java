@@ -2,6 +2,10 @@ package com.eunmi.algorithm.category.brute_force;
 import java.util.HashSet;
 
 public class PrimeNumber_by_others {
+    public static void main(String[] args) {
+        PrimeNumber_by_others a = new PrimeNumber_by_others();
+        System.out.println(a.solution("110"));
+    }
         public int solution(String numbers) {
             HashSet<Integer> set = new HashSet<>();
             permutation("", numbers, set);
@@ -28,7 +32,8 @@ public class PrimeNumber_by_others {
         public void permutation(String prefix, String str, HashSet<Integer> set) {
             int n = str.length();
             //if (n == 0) System.out.println(prefix);
-            if(!prefix.equals("")) set.add(Integer.valueOf(prefix));
+            if(!prefix.equals(""))
+                set.add(Integer.valueOf(prefix));
             for (int i = 0; i < n; i++)
                 permutation(prefix + str.charAt(i), str.substring(0, i) + str.substring(i+1, n), set);
 

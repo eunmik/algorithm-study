@@ -9,7 +9,8 @@ public class BigNumber_by_others {
         //"99991" 3,   "99"
         //"11119" 3, "19"
         //"999" 2, "9"
-        System.out.println(b.solution("1924", 2));
+        //System.out.println(b.solution("1924", 2));
+        System.out.println(b.solution("123 12 34", 3));
 
     }
     public String solution(String number, int k){
@@ -27,12 +28,19 @@ public class BigNumber_by_others {
          *      answer = "94"
          * **/        //필요한 글자수만큼 반복하기
         for (int j = 0, index = -1; j < number.length() - k; j++) { //최종적으로 나오는 문자열의 길이는 length-k
-
+            System.out.println("for (int j = "+j+", index = "+index+"; j < "+number.length()+"-"+k+"; j++)");
             char max = 0;
+            System.out.println("       max = "+max);
+
             //앞에서 남겨야 되는 숫자 중에 제일 큰 수체크
             for(int i = index+1; i <=k+j; i++){
+                System.out.println("     for(int i = "+(index+1)+"; i <="+k+"+"+j+"; i++){");
+
                 if(max < number_array[i]){
+                    System.out.println("       if("+max+" < number_array["+i+"] //"+number_array[i]+"){ //" + (max < number_array[i]));
+                    System.out.println("             index = "+i);
                     index = i;
+                    System.out.println("             max = "+number_array[i]+";");
                     max = number_array[i];
                 }
             }
@@ -40,6 +48,8 @@ public class BigNumber_by_others {
 
             //제일 큰수를 정답에 추가
             answer +=max;
+            System.out.println("answer  = "+answer);
+
         }
 
         return answer;

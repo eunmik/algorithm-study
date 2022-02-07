@@ -7,8 +7,8 @@ public class NumberOfCases {
         /**
          * (1,2,3) -> (1,2),(1,3),(2,3)
          */
-        //comb2(new int[]{1,2,3}, new boolean[3], 0, 3, 2);
-        combi3(new int[]{1,2,3}, 0, 3, 2, 0);
+        comb2(new int[]{1,2,3}, new boolean[3], 0, 3, 2);
+        //combi3(new int[]{1,2,3}, 0, 3, 2, 0);
 
 
     }
