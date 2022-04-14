@@ -2,9 +2,7 @@ package com.eunmi.algorithm.boj;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+
 
 /**
  https://www.acmicpc.net/problem/10989
@@ -16,22 +14,37 @@ public class 수정렬하기3 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
 
-        List<Integer> list = new ArrayList<Integer>();
+        //List<Integer> list = new ArrayList<Integer>();
+        int[] array = new int[N];
         for(int i =0; i<N; i++){
-            list.add(Integer.parseInt(br.readLine()));
+            array[i] = Integer.parseInt(br.readLine());
         }
 
-        Collections.sort(list);
+        //counting sort
+        int[] counting = new int[10001];
+        int[] sorted = new int[N];
+
+        for(int i =0; i<N; i++){
+            counting[array[i]]++;
+        }
+
+        for(int i=1; i<counting.length; i++){
+            counting[i] += counting[i - 1];
+        }
+
+        for(int i=N-1; i >=0; i--){
+            int value = array[i]; //10
+            counting[value]--; //9
+            sorted[counting[value]] = array[i];
+
+        }
+
         StringBuilder sb = new StringBuilder();
-        for(Integer i : list){
+        for(int i : sorted){
             sb.append(i+"\n");
         }
 
         System.out.println(sb);
-
-        Runtime.getRuntime().gc();
-        long usedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
-        System.out.print(usedMemory + " bytes");
 
 
     }
