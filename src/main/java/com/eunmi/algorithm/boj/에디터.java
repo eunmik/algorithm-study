@@ -49,13 +49,12 @@ public class 에디터 {
                     currentCursor+=1;
 
                     break;
-
             }
-
         }
         for(char c : list){
-            System.out.print(c);
+            sb.append(c);
         }
+        System.out.println(sb);
 
     }
 }
