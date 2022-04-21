@@ -30,17 +30,10 @@ public class 단어정렬 {
             public int compare(String o1, String o2) {
                 if(o1.length() == o2.length()){
                     for(int i =0; i<o1.length(); i++){
-                        if (o1.charAt(i) < o2.charAt(i)) {
-                            return -1;  //m (61) < t(68) 뒤에 글자가 더 클 때  -1 : 오름차순
-                        }else if(o2.charAt(i) < o1.charAt(i)) {
-                            return 1;
-                        }
+                        return o1.compareTo(o2); //오름차순으로 정렬
                     }
                 }
-                if(o1.length() < o2.length()){
-                    return -1;
-                }
-                return 0;
+                return  o1.length() - o2.length();
 
             }
         });
