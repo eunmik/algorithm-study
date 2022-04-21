@@ -32,6 +32,8 @@ public class 단어정렬 {
                     for(int i =0; i<o1.length(); i++){
                         if (o1.charAt(i) < o2.charAt(i)) {
                             return -1;  //m (61) < t(68) 뒤에 글자가 더 클 때  -1 : 오름차순
+                        }else if(o2.charAt(i) < o1.charAt(i)) {
+                            return 1;
                         }
                     }
                 }
