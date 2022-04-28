@@ -2,9 +2,7 @@ package com.eunmi.algorithm.boj;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
 
 /**
  * https://www.acmicpc.net/problem/1158
@@ -18,6 +16,8 @@ import java.util.StringTokenizer;
  [3, 6, 2, 7, 5, 1, 4]
 
  7 3 <3, 6, 2, 7, 5, 1, 4>
+
+ Hint : Queue
  */
 public class 요세푸스문제 {
     public static void main(String[] args) throws Exception{
@@ -25,32 +25,30 @@ public class 요세푸스문제 {
         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
         int N = Integer.parseInt(st.nextToken());
         int K = Integer.parseInt(st.nextToken());
-        int index = K-1;
+
         StringBuilder sb = new StringBuilder();
         sb.append("<");
-        List<Integer> list = new ArrayList<>();
+
+        Queue<Integer> queue = new LinkedList<>();
         for(int i =1; i<=N; i++){
-            list.add(i);
+            queue.add(i);
+        }
+        while(!queue.isEmpty()){
+            for(int i =1; i<=K; i++){
+                if(i == K){
+                    sb.append(queue.poll() + ", ");
+                }else {
+                    int tmp = queue.poll();
+                    queue.add(tmp);
+                }
+            }
+
         }
 
-        while(list.size() > 1){
-
-
-            System.out.println("index : "+index);
-            sb.append(list.get(index)+", ");
-            list.remove(index);
-
-            index = (index + K) -1;
-            if(index> list.size()) {
-                index = index - list.size();
-            }
-            if(index == 2 && list.size() == 2) {
-                index = 0;
-            }
-        }
-        sb.append(list.get(0) + ">");
+        sb.replace(sb.lastIndexOf(","), sb.length() , ">");
         System.out.println(sb);
 
 
     }
 }
+
