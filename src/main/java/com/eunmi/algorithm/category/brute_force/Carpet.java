@@ -18,7 +18,8 @@ public class Carpet {
         //red의 갯수는 (x-2)*(y-2)
         int height = 0;
         int width = 0;
-        for (height = 3; height <= (int) (brown + 4) / 2; height++) { //red가 최소 1개 있기 때문에 세로 블럭은 3개 미만이 될 수 없어 3부터 시작
+        for (height = 3; height <= (int) (brown + 4) / 2; height++) {
+            //red가 최소 1개 있기 때문에 세로 블럭은 3개 미만이 될 수 없어 3부터 시작
 
             width = ((brown + 4) / 2) - height; // ((10+4)/2) - 3 = 4
             if (width < height) { // 4 < 3
