@@ -2,6 +2,7 @@ package com.eunmi.algorithm.category.binary_search;
 
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -47,10 +48,40 @@ public class 입국심사 {
         return binarySearch(n - 1, map);
     }
 
+    public int solution_by_other(int n, int[] times) {
+        Arrays.sort(times);
+        return (int) find((long) n, times, (long) times.length, times[0], (long) ((long) times[0] * (long) n));
+    }
+
+    public long find(long n, int[] times, long nExamination, long from, long to) {
+        long minTime;
+        long tmp = n;
+        if (from == to) {
+            return from;
+        }
+        else {
+            minTime = (from + to) / 2;// + ((from + to) % 2 == 1? 1 : 0);
+            for (int i = 0; i < nExamination; i++) {
+                tmp -=  minTime / (long) times[i];
+            }
+            if (tmp > 0) {
+                return find(n, times, nExamination, minTime + 1, to);
+            }
+            else {
+                return find(n, times, nExamination, from, minTime);
+            }
+        }
+
+}
+
     @Test
     public void 정답() {
-        assertEquals(28, solution(6, new int[]{7,10}));
-        assertEquals(4, solution(6, new int[]{1,2,3}));
+       // assertEquals(28, solution_by_other(6, new int[]{7,10}));
+       // assertEquals(4, solution_by_other(6, new int[]{1,2,3}));
+       // assertEquals(1, solution(3, new int[]{1,1,1}));
+        assertEquals(2, solution(3, new int[]{1,2,3}));
+
+
 
     }
 
