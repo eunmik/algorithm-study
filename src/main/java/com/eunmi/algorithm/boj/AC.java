@@ -52,7 +52,11 @@ public class AC{
                     sb.append(list.get(i)+",");
 
                 }
-                sb.replace(sb.lastIndexOf(","), sb.length(), "]");
+                if(sb.lastIndexOf(",") > -1) {
+                    sb.replace(sb.lastIndexOf(","), sb.length(), "]");
+                }else {
+                    sb.append("]");
+                }
                 sb.append("\n");
             }
 
