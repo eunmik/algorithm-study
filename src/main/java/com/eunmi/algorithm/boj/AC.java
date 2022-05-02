@@ -29,10 +29,12 @@ public class AC{
             for(int i =0; i<commands.length; i++){
                 switch(commands[i]){
                     case 'R':
-                        int tmp = list.get(0);
-                        Collections.sort(list, Collections.reverseOrder());
-                        if (tmp == list.get(0)) {
-                            Collections.sort(list);
+                        if(!list.isEmpty()) {
+                            int tmp = list.get(0);
+                            Collections.sort(list, Collections.reverseOrder());
+                            if (tmp == list.get(0)) {
+                                Collections.sort(list);
+                            }
                         }
 
                         break;
