@@ -2,14 +2,14 @@ package com.eunmi.algorithm.boj;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.PriorityQueue;
-import java.util.StringTokenizer;
+import java.lang.reflect.Array;
+import java.util.*;
 
 /**
  * https://www.acmicpc.net/problem/1966
  */
 public class 프린터큐 {
-    static class Job implements Comparable<Job>{
+    static class Job{
         int index;
         int priority;
 
@@ -17,13 +17,7 @@ public class 프린터큐 {
             this.index = index;
             this.priority = priority;
         }
-        @Override
-        public int compareTo(Job o) {
-            if(o.priority == this.priority){
-                return this.index - o.index;
-            }
-            return o.priority - this.priority;
-        }
+
     }
     public static void main(String[] args) throws  Exception{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -34,21 +28,29 @@ public class 프린터큐 {
             StringTokenizer st = new StringTokenizer(br.readLine(), " ");
             int size = Integer.parseInt(st.nextToken());
             int M = Integer.parseInt(st.nextToken());
-            PriorityQueue<Job> queue = new PriorityQueue<>();
+            Queue<Job> queue = new LinkedList<>();
             st = new StringTokenizer(br.readLine(), " ");
-
+            List<Integer> priorityList = new ArrayList<>();
             for(int i =0; i<size; i++){
-                queue.add(new Job(i, Integer.parseInt(st.nextToken())));
+                int p = Integer.parseInt(st.nextToken());
+                queue.add(new Job(i, p));
+                priorityList.add(p);
             }
+            Collections.sort(priorityList, Comparator.reverseOrder());
 
             int count = 0;
+            int i =0;
             while(!queue.isEmpty()){
                 Job job = queue.poll();
-                count++;
-                System.out.println("index : "+job.index + "priority"+job.priority);
-                if(job.index == M){
-                    sb.append(count+"\n");
 
+                if(job.priority != priorityList.get(i)){
+                    queue.add(job);
+                }else if(job.index == M && priorityList.get(i) == job.priority){
+                    sb.append((count+1) +"\n");
+                    break;
+                }else if(job.priority == priorityList.get(i)){
+                    count++;
+                    i++;
                 }
             }
             N--;
