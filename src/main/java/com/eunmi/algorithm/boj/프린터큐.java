@@ -19,6 +19,9 @@ public class 프린터큐 {
         }
         @Override
         public int compareTo(Job o) {
+            if(o.priority == this.priority){
+                return this.index - o.index;
+            }
             return o.priority - this.priority;
         }
     }
@@ -42,6 +45,7 @@ public class 프린터큐 {
             while(!queue.isEmpty()){
                 Job job = queue.poll();
                 count++;
+                System.out.println("index : "+job.index + "priority"+job.priority);
                 if(job.index == M){
                     sb.append(count+"\n");
 
