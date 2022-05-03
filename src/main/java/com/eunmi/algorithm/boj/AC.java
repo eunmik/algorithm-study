@@ -28,8 +28,10 @@ public class AC{
             boolean isStraightforward = true;
             boolean isBackward = false;
 
-            for(int i =0; i<commands.length; i++){
-                switch(commands[i]){
+            int c = 0;
+            while(!isError && c< commands.length){
+
+                switch(commands[c++]){
                     case 'R':
                         if(!list.isEmpty()) {
                             if(isStraightforward) {
@@ -45,6 +47,7 @@ public class AC{
                         if(list.isEmpty()){
                             sb.append("error\n");
                             isError = true;
+                            break;
                         }else {
                             if(isBackward){
                                 list.remove(list.size()-1);
@@ -56,6 +59,7 @@ public class AC{
                         break;
                 }
             }
+
             if(!isError) {
                 sb.append("[");
                 if(isBackward){
