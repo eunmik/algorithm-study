@@ -6,6 +6,7 @@ import java.util.*;
 
 /**
  * https://www.acmicpc.net/problem/5430
+ * Hint : deque
  */
 public class AC{
     public static void main(String[] args) throws Exception {
@@ -16,7 +17,7 @@ public class AC{
         while(T > 0){
             char[] commands = br.readLine().toCharArray();
             int N = Integer.parseInt(br.readLine());
-            List<Integer> list = new ArrayList<>();
+            Deque<Integer> list = new LinkedList<>();
             StringTokenizer st = new StringTokenizer(br.readLine(), ",");
             boolean isError = false;
 
@@ -25,22 +26,15 @@ public class AC{
                 token = token.replaceAll("[\\[\\]]", "");
                 list.add(Integer.parseInt(token));
             }
-            boolean isStraightforward = true;
-            boolean isBackward = false;
 
             int c = 0;
+            int reverseCnt = 0;
             while(!isError && c< commands.length){
 
                 switch(commands[c++]){
                     case 'R':
                         if(!list.isEmpty()) {
-                            if(isStraightforward) {
-                                isBackward = true;
-                                isStraightforward = false;
-                            }else {
-                                isBackward = false;
-                                isStraightforward = true;
-                            }
+                            reverseCnt++;
                         }
                         break;
                     case 'D':
@@ -49,12 +43,11 @@ public class AC{
                             isError = true;
                             break;
                         }else {
-                            if(isBackward){
-                                list.remove(list.size()-1);
-                            }else if (isStraightforward){
-                                list.remove(0);
+                            if(reverseCnt%2==0){
+                                list.pollFirst();
+                            }else {
+                                list.pollLast();
                             }
-
                         }
                         break;
                 }
@@ -62,26 +55,19 @@ public class AC{
 
             if(!isError) {
                 sb.append("[");
-                if(isBackward){
-                    for (int i = list.size()-1; i >= 0; i--) {
-                        if(i == 0){
-                            sb.append(list.get(i));
-                        }else {
-                            sb.append(list.get(i)+",");
-                        }
-
+                while(!list.isEmpty()){
+                    if(reverseCnt%2 == 0) {
+                        sb.append(list.pollFirst());
+                    }else {
+                        sb.append(list.pollLast());
                     }
-                }
-                else if(isStraightforward){
-                    for (int i = 0; i < list.size(); i++) {
-                        if(i == list.size()-1){
-                            sb.append(list.get(i));
-                        }else {
-                            sb.append(list.get(i)+",");
-                        }
 
+                    if(list.size()!=0){
+                        sb.append(",");
                     }
+
                 }
+
                 sb.append("]\n");
             }
 
