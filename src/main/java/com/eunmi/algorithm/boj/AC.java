@@ -25,35 +25,50 @@ public class AC{
                 token = token.replaceAll("[\\[\\]]", "");
                 list.add(Integer.parseInt(token));
             }
+            boolean isStraightforward = true;
+            boolean isBackward = false;
 
             for(int i =0; i<commands.length; i++){
                 switch(commands[i]){
                     case 'R':
                         if(!list.isEmpty()) {
-                            int tmp = list.get(0);
-                            Collections.sort(list, Collections.reverseOrder());
-                            if (tmp == list.get(0)) {
-                                Collections.sort(list);
+                            if(isStraightforward) {
+                                isBackward = true;
+                                isStraightforward = false;
+                            }else {
+                                isBackward = false;
+                                isStraightforward = true;
                             }
                         }
-
                         break;
                     case 'D':
                         if(list.isEmpty()){
                             sb.append("error\n");
                             isError = true;
                         }else {
-                            list.remove(0);
+                            if(isBackward){
+                                list.remove(list.size()-1);
+                            }else if (isStraightforward){
+                                list.remove(0);
+                            }
+
                         }
                         break;
                 }
             }
             if(!isError) {
                 sb.append("[");
-                for (int i = 0; i < list.size(); i++) {
-                    sb.append(list.get(i)+",");
-
+                if(isBackward){
+                    for (int i = list.size()-1; i >= 0; i--) {
+                        sb.append(list.get(i)+",");
+                    }
                 }
+                else if(isStraightforward){
+                    for (int i = 0; i < list.size(); i++) {
+                        sb.append(list.get(i)+",");
+                    }
+                }
+
                 if(sb.lastIndexOf(",") > -1) {
                     sb.replace(sb.lastIndexOf(","), sb.length(), "]");
                 }else {
