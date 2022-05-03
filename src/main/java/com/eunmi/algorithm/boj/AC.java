@@ -64,26 +64,32 @@ public class AC{
                 sb.append("[");
                 if(isBackward){
                     for (int i = list.size()-1; i >= 0; i--) {
-                        sb.append(list.get(i)+",");
+                        if(i == 0){
+                            sb.append(list.get(i));
+                        }else {
+                            sb.append(list.get(i)+",");
+                        }
+
                     }
                 }
                 else if(isStraightforward){
                     for (int i = 0; i < list.size(); i++) {
-                        sb.append(list.get(i)+",");
+                        if(i == list.size()-1){
+                            sb.append(list.get(i));
+                        }else {
+                            sb.append(list.get(i)+",");
+                        }
+
                     }
                 }
-
-                if(sb.lastIndexOf(",") > -1) {
-                    sb.replace(sb.lastIndexOf(","), sb.length(), "]");
-                }else {
-                    sb.append("]");
-                }
-                sb.append("\n");
+                sb.append("]\n");
             }
 
             T--;
         }
         System.out.print(sb);
+
+        br.close();
     }
 
 }
