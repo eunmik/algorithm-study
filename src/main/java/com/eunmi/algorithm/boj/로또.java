@@ -9,7 +9,40 @@ import java.util.*;
  * Hint : 재귀
  */
 public class 로또 {
-    static List<List<Integer>> List;
+    public static class Number implements Comparable<Number>{
+        List<Integer> list;
+        public Number(List<Integer> list){
+            this.list = list;
+        }
+
+        @Override
+        public int compareTo(Number o) {
+            if(this.list.get(0) == o.list.get(0)){
+                for(int i =1; i<o.list.size(); i++){
+                    if(this.list.get(i) != o.list.get(i)){
+                        return this.list.get(i) - o.list.get(i);
+                    }
+                }
+            }
+            return this.list.get(0) - o.list.get(0);
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (!(obj instanceof Number)) {
+                return false;
+            }
+            Number number = (Number) obj;
+            for(int i=0; i<number.list.size(); i++){
+                if(number.list.get(i) != this.list.get(i)){
+                    return false;
+                }
+            }
+            return true;
+        }
+
+    }
+    static PriorityQueue<Number> Queue;
     static int N;
     static StringBuilder sb;
     public static void main(String[] args) throws Exception{
@@ -19,7 +52,7 @@ public class 로또 {
         while(N != 0){
             StringTokenizer st = new StringTokenizer(br.readLine(), " ");
             N = Integer.parseInt(st.nextToken());
-            List = new ArrayList<>();
+            Queue = new PriorityQueue<>();
             ArrayList<Integer> intArray = new ArrayList<>();
             for(int i =0; i<N; i++){
                 intArray.add(Integer.parseInt(st.nextToken()));
@@ -28,21 +61,8 @@ public class 로또 {
                 solution(intArray, i);
             }
 
-            Collections.sort(List, new Comparator<java.util.List<Integer>>() {
-                @Override
-                public int compare(java.util.List<Integer> o1, java.util.List<Integer> o2) {
-                    for(int i =0; i<o1.size(); i++){
-                        if(!o1.get(i).equals(o2.get(i))){
-                            return o1.get(i) - o2.get(i);
-                        }
-
-                    }
-                    return 0;
-                }
-            });
-
-            for(int i=0; i<List.size(); i++){
-                String result = List.get(i).toString().replaceAll("[\\[\\],]", "");
+            while(!Queue.isEmpty()){
+                String result = Queue.poll().list.toString().replaceAll("[\\[\\],]", "");
                 sb.append(result+"\n");
 
             }
@@ -50,17 +70,14 @@ public class 로또 {
         }
 
         System.out.println(sb);
-
-
-
-
     }
 
     static void solution(ArrayList<Integer> array, int index){
 
         if(array.size() == 6){
-            if(!List.contains(array)){
-                List.add(array);
+            Number num = new Number(array);
+            if(!Queue.contains(num)){
+                Queue.add(num);
             }
             return;
         }
