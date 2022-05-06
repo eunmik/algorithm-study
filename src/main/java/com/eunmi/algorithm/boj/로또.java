@@ -6,86 +6,60 @@ import java.util.*;
 
 /**
  * https://www.acmicpc.net/problem/6603
- * Hint : 재귀
+ * Hint : 재귀, dfs
  */
 public class 로또 {
-    public static class Number implements Comparable<Number>{
-        List<Integer> list;
-        public Number(List<Integer> list){
-            this.list = list;
-        }
 
-        @Override
-        public int compareTo(Number o) {
-            if(this.list.get(0) == o.list.get(0)){
-                for(int i =1; i<o.list.size(); i++){
-                    if(this.list.get(i) != o.list.get(i)){
-                        return this.list.get(i) - o.list.get(i);
-                    }
-                }
-            }
-            return this.list.get(0) - o.list.get(0);
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            if (!(obj instanceof Number)) {
-                return false;
-            }
-            Number number = (Number) obj;
-            for(int i=0; i<number.list.size(); i++){
-                if(number.list.get(i) != this.list.get(i)){
-                    return false;
-                }
-            }
-            return true;
-        }
-
-    }
-    static PriorityQueue<Number> Queue;
     static int N;
+    static int[] S;
     static StringBuilder sb;
+    static int[] result;
     public static void main(String[] args) throws Exception{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         N = Integer.MAX_VALUE;
         sb = new StringBuilder();
+
         while(N != 0){
             StringTokenizer st = new StringTokenizer(br.readLine(), " ");
             N = Integer.parseInt(st.nextToken());
-            Queue = new PriorityQueue<>();
-            ArrayList<Integer> intArray = new ArrayList<>();
+            result = new int[N];
+            S = new int[N];
+
             for(int i =0; i<N; i++){
-                intArray.add(Integer.parseInt(st.nextToken()));
-            }
-            for(int i=0; i<N; i++){
-                solution(intArray, i);
+                S[i] = Integer.parseInt(st.nextToken());
             }
 
-            while(!Queue.isEmpty()){
-                String result = Queue.poll().list.toString().replaceAll("[\\[\\],]", "");
-                sb.append(result+"\n");
+            dfs(0,0);
 
-            }
             sb.append("\n");
         }
 
         System.out.println(sb);
     }
 
-    static void solution(ArrayList<Integer> array, int index){
+    static void dfs(int start, int depth){
 
-        if(array.size() == 6){
-            Number num = new Number(array);
-            if(!Queue.contains(num)){
-                Queue.add(num);
+        if(depth == 6){
+
+            print();
+        }
+        for(int i = start; i < N; i++){
+            System.out.println("start : "+start +", depth : "+depth);
+            System.out.println("i : "+i);
+            result[i] = 1;
+            dfs(i + 1, depth + 1);
+            result[i] = 0;
+        }
+    }
+
+    static void print() {
+        for(int i =0; i <N; i++){
+            if(result[i] == 1){
+                //sb.append(S[i] + " ");
+                System.out.print(S[i]+ " ");
             }
-            return;
         }
-        ArrayList<Integer> tmp = (ArrayList<Integer>) array.clone();
-        tmp.remove(index);
-        for(int i =0; i<tmp.size(); i++){
-            solution(tmp, i);
-        }
-        return;
+        System.out.println();
+        sb.append("\n");
     }
 }
