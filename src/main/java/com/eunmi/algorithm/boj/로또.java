@@ -7,6 +7,7 @@ import java.util.*;
 /**
  * https://www.acmicpc.net/problem/6603
  * Hint : 재귀, dfs
+ * todo 다시 풀기
  */
 public class 로또 {
 
@@ -44,8 +45,6 @@ public class 로또 {
             print();
         }
         for(int i = start; i < N; i++){
-            System.out.println("start : "+start +", depth : "+depth);
-            System.out.println("i : "+i);
             result[i] = 1;
             dfs(i + 1, depth + 1);
             result[i] = 0;
@@ -55,11 +54,9 @@ public class 로또 {
     static void print() {
         for(int i =0; i <N; i++){
             if(result[i] == 1){
-                //sb.append(S[i] + " ");
-                System.out.print(S[i]+ " ");
+                sb.append(S[i] + " ");
             }
         }
-        System.out.println();
         sb.append("\n");
     }
 }
