@@ -17,6 +17,8 @@ public class 소수찾기 {
             int num = Integer.parseInt(st.nextToken());
             if(num != 1 && num % 2 != 0) {
                 cnt++;
+            }else if(num == 2){
+                cnt++;
             }
         }
         System.out.println(cnt);
