@@ -19,8 +19,7 @@ public class 약수 {
             divisor[i] = Integer.parseInt(st.nextToken());
         }
         Arrays.sort(divisor);
-        System.out.println(divisor[N-1] * 2);
-
-
+        int result = divisor[N-1] * 2;
+        System.out.println(result);
     }
 }
