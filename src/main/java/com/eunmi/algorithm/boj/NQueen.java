@@ -28,7 +28,6 @@ public class NQueen {
         }
 
         for(int i =0; i<N; i++){
-            //System.out.println("map["+depth+"] = "+map[depth]);
             map[depth] = i;
             if(possible(depth)){
                 dfs(depth + 1);
@@ -36,15 +35,22 @@ public class NQueen {
         }
     }
 
-    static boolean possible(int y){
-        for(int i =0; i<y; i++){
+    static boolean possible(int depth){
+        for(int i =0; i<depth; i++){
 
-            if(map[y] == map[i]){ //same row
-                System.out.println("map["+y+"] : "+map[y]+" map["+i+"] : "+map[i]);
+            if(map[depth] == map[i]){ //same row
                 return false;
             }
 
-            else if(Math.abs(y - i) == Math.abs(map[y] - map[i])){ //same diagonal
+            else if(Math.abs(depth - i) == Math.abs(map[depth] - map[i])){//same diagonal
+                //[0,0]의 대각선은 [1,1][2,2],[3,3]
+                //y가 1일 때 [0,1,0,0]
+                // Math.abs(1 - 0) == Math.abs(map[1] - map[0])
+                //[1,2]의 대각선은 [0,1][2,1],[3,0],[2,3]
+                //y가 2일 때 [0,2,3,0]
+                // Math.abs(2 - 0) != Math.abs(map[2] - map[0])   2 = 3
+                // Math.abs(2 - 1) == Math.abs(map[2] - map[1])   1 = 1
+
                 return false;
             }
 
