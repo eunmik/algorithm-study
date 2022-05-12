@@ -24,6 +24,9 @@ public class 소수구하기 {
     }
 
     public static boolean isPrimeNumber(int num){
+        if(num == 1){
+            return false;
+        }
         int result = Integer.MAX_VALUE;
         for(int i =2; i*i<=num; i++){
             int tmp = num%i;
