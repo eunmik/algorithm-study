@@ -15,12 +15,25 @@ public class 소수찾기 {
         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
         while(st.hasMoreTokens()){
             int num = Integer.parseInt(st.nextToken());
-            if(num != 1 && num % 2 != 0) {
-                cnt++;
-            }else if(num == 2){
-                cnt++;
+            if(num!=1){
+                if(isPrimeNumber(num)){
+                    cnt++;
+                }
             }
+
         }
         System.out.println(cnt);
+    }
+
+    static boolean isPrimeNumber(int num){
+        int result = Integer.MAX_VALUE;
+        for(int i =2; i*i<=num; i++){
+            int tmp = num%i;
+            result = Math.min(tmp, result);
+        }
+        if(result != 0) {
+            return true;
+        }
+        return false;
     }
 }
