@@ -6,13 +6,19 @@ import java.util.StringTokenizer;
 
 /**
  * https://www.acmicpc.net/problem/14889
- * Hint :
+ * Todo 다시 풀어보기 22-05-19
+ * Hint : 백트랙킹
  */
 public class 스타트와링크 {
+    static int min;
+    static int N;
+    static boolean[] visited;
+    static int[][] map;
+
     public static void main(String[] args) throws Exception{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         N = Integer.parseInt(br.readLine());
-        int[][] map = new int[N][N];
+        map = new int[N][N];
         visited = new boolean[N];
         StringTokenizer st;
         for(int i =0; i<N; i++){
@@ -26,22 +32,15 @@ public class 스타트와링크 {
         System.out.println(min);
 
     }
-    static int min;
-    static int N;
-    static boolean[] visited;
-    static int[][] map;
 
     static void dfs(int index, int depth){
         if(depth == N / 2 ){
             diff();
         }
         for(int i = index; i < N; i++){
-            //if(!visited[i]) {
-
                 visited[i] = true;
                 dfs(i + 1, depth + 1);
                 visited[i] = false;
-            //}
 
         }
     }
