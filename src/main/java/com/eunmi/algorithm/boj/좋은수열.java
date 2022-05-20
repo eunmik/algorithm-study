@@ -7,6 +7,7 @@ import java.util.Queue;
 
 /**
  * https://www.acmicpc.net/problem/2661
+ * Hint :
  */
 public class 좋은수열 {
     public static void main(String[] args) throws Exception{
@@ -23,6 +24,10 @@ public class 좋은수열 {
 
     static void dfs(int index, int depth, int num){
         if(depth == N){
+            for(int i =0; i<N; i++){
+                System.out.print(sequence[i]+" ");
+            }
+            System.out.println();
             if(isGoodSequence()){
                 String tmp = "";
                 for(int i =0; i<sequence.length; i++){
@@ -33,9 +38,10 @@ public class 좋은수열 {
             return;
         }
         for(int i = index; i<N; i++){
+
             if(num > 3) num = 1;
             sequence[i] = num;
-            dfs(i+1, depth+1, num+1);
+            dfs(i+1, i+1, num+1);
             //sequence[i] = 0;
         }
     }
