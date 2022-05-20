@@ -2,68 +2,46 @@ package com.eunmi.algorithm.boj;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.Queue;
+
 
 /**
  * https://www.acmicpc.net/problem/2661
- * Hint :
+ * Hint : 백트랙킹
+ * Todo 다시 풀기 220520
  */
 public class 좋은수열 {
+    static int N;
     public static void main(String[] args) throws Exception{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         N = Integer.parseInt(br.readLine());
-        result = Integer.MAX_VALUE;
-        sequence = new int[N];
-        dfs(0, 0, 1);
-        System.out.println(result);
+        backtracking("");
+
     }
-    static int N;
-    static int result;
-    static int[] sequence;
+    static void backtracking(String result){
+        if (result.length() == N) {
+            System.out.println(result);
+            //가장 첫번째로 나오는 백트래킹 알고리즘의 결과가 가장 작은 수 이기 때문에
+            //최초 출력 후 강제 종료 한다.
+            System.exit(0);
 
-    static void dfs(int index, int depth, int num){
-        if(depth == N){
-            for(int i =0; i<N; i++){
-                System.out.print(sequence[i]+" ");
-            }
-            System.out.println();
-            if(isGoodSequence()){
-                String tmp = "";
-                for(int i =0; i<sequence.length; i++){
-                    tmp += sequence[i];
-                }
-                result = Math.min(Integer.parseInt(tmp), result);
-            }
-            return;
         }
-        for(int i = index; i<N; i++){
+        for(int i =1; i<=3; i++){
+            if(isGoodSequence(result+i)){
+                backtracking(result + i);
+            }
+        }
 
-            if(num > 3) num = 1;
-            sequence[i] = num;
-            dfs(i+1, i+1, num+1);
-            //sequence[i] = 0;
-        }
     }
+    static boolean isGoodSequence(String s){
 
-    static boolean isGoodSequence(){
-        Queue<Integer> queue = new LinkedList<>();
-        for(int i =0; i<N; i++){
-            if(queue.isEmpty()) {
-                queue.add(sequence[i]);
-            }
-            else {
-                int size = queue.size();
-                while(size > 0) {
-                    int top = queue.poll();
-                    if (top == sequence[i]) {
-                        return false;
-                    } else {
-                        queue.add(top);
-                        size--;
-                    }
-                }
-                queue.add(sequence[i]);
+        int length = s.length() / 2;
+        for(int i = 1; i<= length; i++){
+            //마지막 1개와 그 앞의 1개의 수가 동일 한지  ex: [3 2 1 2 1] 마지마1과 그 앞의 2가 동일한지
+            //마지막 2개와 그 앞의 2개의 수가 동일 한지  ex: [3 2 1 2 1] 마지막 2 1 과 그 앞의 2 1이 동일한지
+            if(s.substring(s.length() - i).equals(
+                    s.substring(s.length() -2*i, s.length() -i)
+            )){
+                return false;
             }
         }
         return true;
