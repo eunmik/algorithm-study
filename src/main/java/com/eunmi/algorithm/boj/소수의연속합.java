@@ -10,30 +10,31 @@ import java.util.List;
  */
 public class 소수의연속합 {
     static int N;
+
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         N = Integer.parseInt(br.readLine());
 
 
         List<Integer> prevList = new ArrayList<>();
-        for(int i =2; i<=N; i++){
+        for (int i = 2; i <= N; i++) {
             int result = 0;
             List<Integer> list = new ArrayList<>();
 
-            for(int j=i; j<=N; j++){
-                if(isPrime(j)){
+            for (int j = i; j <= N; j++) {
+                if (isPrime(j)) {
                     list.add(j);
-                    result+= j;
+                    result += j;
                 }
-                if(result == N && !prevList.equals(list)){
+                if (result == N && !prevList.equals(list)) {
                     prevList = new ArrayList<>();
-                    for(Integer num : list){
+                    for (Integer num : list) {
                         prevList.add(num);
                     }
                     cnt++;
                     break;
                 }
-                if(result > N){
+                if (result > N) {
                     break;
                 }
             }
@@ -41,17 +42,18 @@ public class 소수의연속합 {
         System.out.println(cnt);
 
     }
+
     static int cnt;
 
 
-    static boolean isPrime(int num){
+    static boolean isPrime(int num) {
         int result = Integer.MAX_VALUE;
-        for(int i=2; i*i<=num; i++){
+        for (int i = 2; i * i <= num; i++) {
 
-            int remainder = num%i;
+            int remainder = num % i;
             result = Math.min(remainder, result);
         }
-        if(result != 0){
+        if (result != 0) {
             return true;
         }
         return false;

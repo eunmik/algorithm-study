@@ -1,9 +1,5 @@
 package com.eunmi.algorithm.practices.a210726;
 
-import com.sun.xml.internal.fastinfoset.util.CharArray;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Stack;
 
 //https://programmers.co.kr/learn/courses/30/lessons/60057
