@@ -3,59 +3,55 @@ package com.eunmi.algorithm.boj;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * https://www.acmicpc.net/problem/1644
+ * Hint : 에라토스테네스의 체
  */
 public class 소수의연속합 {
+
     static int N;
+    static boolean prime[] = new boolean[4000001];
+    static ArrayList<Integer> prime_numbers = new ArrayList<>();
+    static int cnt;
 
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         N = Integer.parseInt(br.readLine());
+        에라토스테네스의체();
 
-
-        List<Integer> prevList = new ArrayList<>();
-        for (int i = 2; i <= N; i++) {
-            int result = 0;
-            List<Integer> list = new ArrayList<>();
-
-            for (int j = i; j <= N; j++) {
-                if (isPrime(j)) {
-                    list.add(j);
-                    result += j;
-                }
-                if (result == N && !prevList.equals(list)) {
-                    prevList = new ArrayList<>();
-                    for (Integer num : list) {
-                        prevList.add(num);
-                    }
+        for (int i = 0; i < prime_numbers.size(); i++) {
+            int total = 0;
+            for (int j = i; j < prime_numbers.size(); j++) {
+                total += prime_numbers.get(j);
+                if (total == N) {
                     cnt++;
                     break;
-                }
-                if (result > N) {
+                } else if (total > N) {
                     break;
                 }
             }
         }
         System.out.println(cnt);
-
     }
 
-    static int cnt;
+    static void 에라토스테네스의체() {
+        //소수는 false
+        //1은 수소가 아니므로 제외
+        prime[0] = prime[1] = true;
 
-
-    static boolean isPrime(int num) {
-        int result = Integer.MAX_VALUE;
-        for (int i = 2; i * i <= num; i++) {
-
-            int remainder = num % i;
-            result = Math.min(remainder, result);
+        for (int i = 2; i * i <= N; i++) {
+            if (!prime[i]) {
+                for (int j = i * i; j <= N; j += i) {
+                    prime[j] = true;
+                }
+            }
         }
-        if (result != 0) {
-            return true;
+
+        for (int i = 0; i <= N; i++) {
+            if (!prime[i]) {
+                prime_numbers.add(i);
+            }
         }
-        return false;
     }
 }
