@@ -12,17 +12,17 @@ import java.util.List;
 public class 골드바흐의추측 {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        List<Integer> prime_list = sieve(1000000);
         while(true){
             int num = Integer.parseInt(br.readLine());
             if(num == 0){
                 break;
             }
-            List<Integer> prime_list = sieve(num);
+
             int a = 0, b = 0;
             int n = 0;
 
             for(int i =0; i<prime_list.size(); i++){
-
                 int num1 = prime_list.get(i);
                 for(int j =i+1; j<prime_list.size(); j++){
                     int num2 = prime_list.get(j);
