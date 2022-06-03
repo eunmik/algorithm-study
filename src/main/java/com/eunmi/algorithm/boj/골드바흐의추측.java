@@ -22,9 +22,9 @@ public class 골드바흐의추측 {
             int a = 0, b = 0;
             int n = 0;
 
-            for(int i =0; i<prime_list.size(); i++){
+            for(int i =0; i<prime_list.size()/2; i++){
                 int num1 = prime_list.get(i);
-                for(int j =i+1; j<prime_list.size(); j++){
+                for(int j =i+1; j<prime_list.size()/2; j++){
                     int num2 = prime_list.get(j);
                     int total = num1 + num2;
                     if(total == num){
