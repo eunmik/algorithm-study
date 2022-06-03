@@ -1,0 +1,63 @@
+package com.eunmi.algorithm.boj;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * https://www.acmicpc.net/problem/6588
+ * Hint : 에라토스테네스의 체
+ */
+public class 골드바흐의추측 {
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        while(true){
+            int num = Integer.parseInt(br.readLine());
+            if(num == 0){
+                break;
+            }
+            List<Integer> prime_list = sieve(num);
+            int a = 0, b = 0;
+            int n = 0;
+
+            for(int i =0; i<prime_list.size(); i++){
+
+                int num1 = prime_list.get(i);
+                for(int j =i+1; j<prime_list.size(); j++){
+                    int num2 = prime_list.get(j);
+                    int total = num1 + num2;
+                    if(total == num){
+                        if(num2 - num1 > n) {
+                            a = num1;
+                            b = num2;
+                            n = num2 - num1;
+                        }
+                    }
+                }
+            }
+            System.out.println(num +" = "+a+" + "+b);
+
+
+        }
+    }
+
+    static List<Integer> sieve(int n){
+        boolean prime[] = new boolean[n+1];
+        List<Integer> prime_number = new ArrayList<>();
+        prime[0] = prime[1] = true;
+        for(int i =2; i*i < n; i++){
+            if(!prime[i]){
+                for(int j = i*i; j<n; j+=i){
+                    prime[j] = true;
+                }
+            }
+        }
+        for(int i =0; i<n; i++){
+            if(!prime[i]) {
+                prime_number.add(i);
+            }
+        }
+        return prime_number;
+    }
+}
