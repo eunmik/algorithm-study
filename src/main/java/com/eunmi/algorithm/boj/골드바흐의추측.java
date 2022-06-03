@@ -28,12 +28,14 @@ public class 골드바흐의추측 {
                     int num2 = prime_list.get(j);
                     int total = num1 + num2;
                     if(total == num){
-                        if(num2 - num1 > n) {
                             a = num1;
                             b = num2;
                             n = num2 - num1;
-                        }
+                            break;
                     }
+                }
+                if(n > 0){
+                    break;
                 }
             }
             System.out.println(num +" = "+a+" + "+b);
